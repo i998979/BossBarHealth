@@ -1,0 +1,132 @@
+BossBarHealth:
+  # Decimal places of all numbers including current hp, max hp, hp lost/gained
+  Decimal: 2
+
+  Self:
+    # If it is enabled, it will show your hp at all times
+    Enabled: true
+    # Color of the boss bar
+    # Avaliable options: BLUE, GREEN, PINK, PURPLE, RED, WHITE, YELLOW
+    # https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarColor.html
+    Color: GREEN
+    # Style of the boss bar
+    # Avaliable options: SEGMENTED_10, SEGMENTED_12, SEGMENTED_20, SEGMENTED_6, SOLID
+    # https://hub.spigotmc.org/javadocs/spigot/org/bukkit/boss/BarStyle.html
+    Style: SEGMENTED_20
+    # Scale of the boss bar health display
+    # If the option is 2.0, it shows 40/40 when you have full health
+    Scale: 1.0
+    Format:
+      # Display format of normal part of boss bar health, the one which shows constantly
+      # Placeholders:
+      # %name%                      Player's name
+      # %displayname%               Player's display name
+      # %hp%:                       Player's health
+      # %max%:                      Player's maximum health
+      # %hp_percent%:               Player's health in %
+      # %max_percent%:              Player's maximum health in %
+      # %hp_int%                    Player's health in integer
+      # %max_int%:                  Player's maximum health in integer
+      # Player's direction:
+      # %direction_cardinalfull%    North, East, South, West
+      # %direction_cardinal%        N, E, S, W
+      # %direction_ordinalfull%     NorthEast, SouthEast, etc...
+      # %direction_ordinal%         NE, SE, etc...
+      # %direction_number%          0-359 degrees
+      Normal: '%direction_cardinal% %displayname% %hp%/%max%'
+      # Display format of boss bar health when self HP changes
+      # Placeholders:
+      # %change%          Player's health gained/lost
+      # %change_percent%:           Player's health lost/gained in %
+      HpLost: '%direction_cardinal% %displayname% %hp%/%max% &7(&c-%change%&7)'
+      HpGain: '%direction_cardinal% %displayname% %hp%/%max% &7(&a+%change%&7)'
+      # Duration of lost/gained hp staying on screen, in ticks
+      Duration:
+        Normal: 40
+        Zero: 10
+    # How frequent will the boss bar change when facing has changed
+    # Only effective when you have direction placeholders in the display format string
+    Facing:
+      Refresh: 20
+
+  Enemy:
+    # If it is enabled, it will show enemy's hp when you attack
+    Enabled: true
+    Color: GREEN
+    Style: SEGMENTED_20
+    Scale: 1.0
+    # If it is enabled, enemy's boss bar will override self boss bar when active
+    Override: false
+    Format:
+      # Placeholders:
+      # ** All Self's placeholders can be applied except %change% and %change_percent% **
+      #
+      # %e_type%                      Entity type of the enemy
+      # %e_name%                      Name of the enemy
+      # %e_displayname%               Custom display name of the enemy, empty if null
+      # %e_hp%                        Enemy's health
+      # %e_max%                       Enemy's maximum health
+      # %e_hp_percent%                Enemy's health in %
+      # %e_max_percent%               Enemy's maximum health in %
+      # %e_hp_int%                    Enemy's health in integer
+      # %e_max_int%                   Enemy's maximum health in integer
+      # %e_change%:                   Enemy's health lost/gained
+      # Enemy's direction:
+      # %e_direction_cardinalfull%    North, East, South, West
+      # %e_direction_cardinal         N, E, S, W
+      # %e_direction_ordinalfull%     NorthEast, SouthEast, etc...
+      # %e_direction_ordinal%         NE, SE, etc...
+      # %e_direction_number%          0-359 degrees
+
+      HpLost: '%e_name% %e_hp%/%e_max% &7(&c-%e_change%&7)'
+      HpGain: '%e_name% %e_hp%/%e_max% &7(&a+%e_change%&7)'
+      # Duration of enemy's boss bar staying on screen, in ticks
+      Duration:
+        Normal: 40
+        Zero: 10
+    # How frequent will the boss bar change when enemy's facing has changed
+    Facing:
+      Refresh: 20
+
+  # Entity type in the list will not have enemy's hp bar shown for players
+  # Blacklist:
+  # - COW
+  # - CHICKEN
+  # - PIG
+  Blacklist: [ ]
+
+  # How will the boss bar for player himself shows when takes specified type of damage
+  DamageCause:
+    # If the damage taken is not specified below
+    Default:
+      Color: RED
+      Style: SEGMENTED_20
+    # If player takes fall damage
+    # Available options:
+    # https://hub.spigotmc.org/javadocs/spigot/org/bukkit/event/entity/EntityDamageEvent.DamageCause.html
+    FALL:
+      Color: WHITE
+      Style: SOLID
+
+  # Settings of other plugins that was supported by BossBarHealth
+  Hooks:
+    # Hook of Citizens, use Citizens' method to get enemy NPC's name
+    Citizens:
+      Enabled: true
+    # Hook of MythicMobs, use MythicMobs' method to get entity's name
+    MythicMobs:
+      Enabled: true
+    # Hook of WorldGuard, update boss bar's color and style when entering region
+    WorldGuard:
+      # If it is enabled, the boss bar will change when you enter/leave regions specified below
+      Enabled: true
+      Regions:
+        # Name of the region, if player is in multiple region, the plugin takes upper one in config
+        # For example, I have "shop" on top of "spawn", the plugin takes "spawn" because it is placed
+        # higher than "shop"
+        'spawn':
+          Color: BLUE
+          Style: SOLID
+          # 'shop':
+          # Color: PURPLE
+          # Style: SEGMENTED_6

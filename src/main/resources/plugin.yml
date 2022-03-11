@@ -1,0 +1,23 @@
+main: to.epac.factorycraft.bossbarhealth.BossBarHealth
+version: ${project.version}
+name: BossBarHealth
+author: i998979
+description: Display players and enemies health on boss bar
+softdepend: [WorldGuard, WorldGuardEvents, PlaceholderAPI, Citizens, MythicMobs]
+api-version: 1.13
+
+commands:
+  bossbarhealth:
+    aliases: [bbh]
+    description: Main command
+    
+permissions:
+  BossBarHealth.Admin:
+    description: Give access to all commands
+    default: op
+  BossBarHealth.Hide:
+    description: Give access to /bbh hide
+    default: true
+  BossBarHealth.Show:
+    description: Give access to /bbh show
+    default: true

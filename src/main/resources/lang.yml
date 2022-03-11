@@ -1,0 +1,7 @@
+# Translations of the entity name displayed on enemy's bar
+# Only effects on %e_name%
+# If it is not specified in this file, the plugin will use the predefined one in server core
+# Available options:
+# https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+COW: 'Moooo'
+DONKEY: 'Donkiii'
