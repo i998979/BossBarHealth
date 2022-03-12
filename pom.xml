@@ -6,7 +6,7 @@
 
     <groupId>to.epac.factorycraft</groupId>
     <artifactId>BossBarHealth</artifactId>
-    <version>4.1.7-SNAPSHOT</version>
+    <version>4.1.8-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>BossBarHealth</name>
@@ -96,7 +96,7 @@
         <dependency>
             <groupId>net.raidstone</groupId>
             <artifactId>WorldGuardEvents</artifactId>
-            <version>1.16.4</version>
+            <version>1.18.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -116,6 +116,18 @@
             <groupId>io.lumine.xikage</groupId>
             <artifactId>MythicMobs</artifactId>
             <version>4.12.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.lumine</groupId>
+            <artifactId>LumineUtils</artifactId>
+            <version>1.16.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.lumine</groupId>
+            <artifactId>Mythic</artifactId>
+            <version>5.0.2-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
