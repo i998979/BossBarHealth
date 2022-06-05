@@ -1,7 +1,6 @@
 package to.epac.factorycraft.bossbarhealth.hpbar;
 
 import io.lumine.mythic.bukkit.MythicBukkit;
-import io.lumine.xikage.mythicmobs.MythicMobs;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.citizensnpcs.api.CitizensAPI;
 import net.raidstone.wgevents.WorldGuardEvents;
@@ -363,30 +362,16 @@ public class HealthBar {
 
         }
         // If MythicMobs is installed and hook enabled
-        else if (plugin.useMythicMobs() && plugin.getConfigManager().isMythicMobsEnabled()) {
-            boolean isMythicMob;
-            String name;
-            String displayName;
-
-            try {
-                isMythicMob = MythicBukkit.inst().getAPIHelper().isMythicMob(target);
-                name = MythicBukkit.inst().getAPIHelper().getMythicMobInstance(target).getType().getInternalName();
-                displayName = MythicBukkit.inst().getAPIHelper().getMythicMobInstance(target).getDisplayName();
-            } catch (NoClassDefFoundError e) {
-                isMythicMob = MythicMobs.inst().getAPIHelper().isMythicMob(target);
-                name = MythicMobs.inst().getAPIHelper().getMythicMobInstance(target).getType().getInternalName();
-                displayName = MythicMobs.inst().getAPIHelper().getMythicMobInstance(target).getDisplayName();
-            }
-
-            if (isMythicMob)
-                title = title
-                        .replaceAll("%e_name%", name)
-                        .replaceAll("%e_displayname%", displayName);
-            else
-                title = title
-                        .replaceAll("%e_name%", plugin.langManager.getText(target))
-                        .replaceAll("%e_displayname%", target.getCustomName() != null ? target.getCustomName() : "");
-        }
+        else if (plugin.useMythicMobs() && plugin.getConfigManager().isMythicMobsEnabled()
+                && MythicBukkit.inst().getAPIHelper().isMythicMob(target))
+            title = title
+                    .replaceAll("%e_name%", MythicBukkit.inst().getAPIHelper().getMythicMobInstance(target).getType().getInternalName())
+                    .replaceAll("%e_displayname%", MythicBukkit.inst().getAPIHelper().getMythicMobInstance(target).getDisplayName());
+        else
+            title = title
+                    .replaceAll("%e_name%", plugin.langManager.getText(target))
+                    .replaceAll("%e_displayname%", target.getCustomName() != null ?
+                            target.getCustomName() : plugin.langManager.getText(target));
 
 
         title = ChatColor.translateAlternateColorCodes('&', title);
