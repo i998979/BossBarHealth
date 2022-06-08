@@ -20,11 +20,17 @@ public class PlayerMoveHandler {
 
                     HealthBar bar = HealthBar.bars.get(player);
 
-                    if (bar == null) {
-                        bar = new HealthBar();
-                        bar.update(player, BarType.NORMAL, 0.0, null, true);
-                    } else
-                        bar.update(player, bar.getType(), bar.getLostgain(), bar.getCause(), false);
+                    if (bar != null) {
+                        if (!plugin.getConfigManager().getWorldsHidden().contains(player.getWorld()))
+                            bar.update(player, bar.getType(), bar.getLostgain(), bar.getCause(), false);
+                        else
+                            bar.remove();
+                    } else {
+                        if (!plugin.getConfigManager().getWorldsHidden().contains(player.getWorld())) {
+                            bar = new HealthBar();
+                            bar.update(player, BarType.NORMAL, 0.0, null, true);
+                        }
+                    }
                 }
             }
         };
@@ -39,8 +45,12 @@ public class PlayerMoveHandler {
                     HealthBar bar = HealthBar.bars.get(player);
 
                     if (bar != null) {
-                        if (bar.getTarget() != null)
-                            bar.updateEnemy(player, bar.getTarget(), bar.getEnemyType(), bar.getEnemyLostgain(), bar.getEnemyCause(), false);
+                        if (bar.getTarget() != null) {
+                            if (plugin.getConfigManager().getWorldsHidden().contains(player.getWorld()))
+                                bar.remove();
+                            else
+                                bar.updateEnemy(player, bar.getTarget(), bar.getEnemyType(), bar.getEnemyLostgain(), bar.getEnemyCause(), false);
+                        }
                     }
                 }
             }

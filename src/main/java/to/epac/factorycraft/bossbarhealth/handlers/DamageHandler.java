@@ -56,6 +56,7 @@ public class DamageHandler implements Listener {
         // If EnemyBar is not enabled
         if (!plugin.getConfigManager().isEnemyEnabled()) return;
         if (plugin.getConfigManager().getBlacklist().contains(victim.getType().toString())) return;
+        if (plugin.getConfigManager().getWorldsHidden().contains(victim.getWorld())) return;
 
 
         // If Entity Damage By Entity

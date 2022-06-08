@@ -1,7 +1,9 @@
 BossBarHealth:
   # Decimal places of all numbers including current hp, max hp, hp lost/gained
   Decimal: 2
-
+  # Boss bar will be hidden in these worlds
+  WorldsHidden:
+    - dungeon
   Self:
     # If it is enabled, it will show your hp at all times
     Enabled: true

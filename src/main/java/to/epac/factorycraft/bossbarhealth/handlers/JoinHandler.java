@@ -16,9 +16,10 @@ public class JoinHandler implements Listener {
     public void onJoin(PlayerJoinEvent event) {
 
         Bukkit.getScheduler().runTask(plugin, () -> {
-
             Player player = event.getPlayer();
             HealthBar bar = HealthBar.bars.get(player);
+
+            if (plugin.getConfigManager().getWorldsHidden().contains(player.getWorld())) return;
 
             if (bar == null) {
                 bar = new HealthBar();

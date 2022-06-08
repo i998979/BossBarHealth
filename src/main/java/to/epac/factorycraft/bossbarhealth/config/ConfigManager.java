@@ -1,5 +1,7 @@
 package to.epac.factorycraft.bossbarhealth.config;
 
+import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -10,6 +12,7 @@ import to.epac.factorycraft.bossbarhealth.hpbar.BarSetting;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +24,7 @@ public class ConfigManager {
 
     // Global settings
     public static int decimal;
+    public static List<World> worldsHidden;
 
     // SelfBar
     public static boolean self;
@@ -71,6 +75,12 @@ public class ConfigManager {
 
         FileConfiguration conf = YamlConfiguration.loadConfiguration(confFile);
         decimal = conf.getInt("BossBarHealth.Decimal", 2);
+
+        worldsHidden = new ArrayList<>();
+        List<String> worldsList = conf.getStringList("BossBarHealth.WorldsHidden");
+        for (String w : worldsList) {
+            worldsHidden.add(Bukkit.getWorld(w));
+        }
 
         self = conf.getBoolean("BossBarHealth.Self.Enabled", true);
         color = conf.getString("BossBarHealth.Self.Color", "RED");
@@ -135,6 +145,12 @@ public class ConfigManager {
         FileConfiguration conf = new YamlConfiguration();
         conf.set("BossBarHealth.Decimal", decimal);
 
+        List<String> worldsList = new ArrayList<>();
+        for (World world : worldsHidden) {
+            worldsList.add(world.getName());
+        }
+        conf.set("BossBarHealth.WorldsHidden", worldsList);
+
         conf.set("BossBarHealth.Self.Enabled", self);
         conf.set("BossBarHealth.Self.Color", color);
         conf.set("BossBarHealth.Self.Style", style);
@@ -180,6 +196,10 @@ public class ConfigManager {
 
     public int getDecimal() {
         return decimal;
+    }
+
+    public List<World> getWorldsHidden() {
+        return worldsHidden;
     }
 
     public boolean isSelfEnabled() {

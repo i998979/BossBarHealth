@@ -3,14 +3,14 @@ version: ${project.version}
 name: BossBarHealth
 author: i998979
 description: Display players and enemies health on boss bar
-softdepend: [WorldGuard, WorldGuardEvents, PlaceholderAPI, Citizens, MythicMobs]
+softdepend: [ WorldGuard, WorldGuardEvents, PlaceholderAPI, Citizens, MythicMobs ]
 api-version: 1.13
 
 commands:
   bossbarhealth:
-    aliases: [bbh]
+    aliases: [ bbh ]
     description: Main command
-    
+
 permissions:
   BossBarHealth.Admin:
     description: Give access to all commands
