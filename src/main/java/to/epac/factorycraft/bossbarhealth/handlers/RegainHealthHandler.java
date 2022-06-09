@@ -15,20 +15,18 @@ import java.util.Map;
 
 public class RegainHealthHandler implements Listener {
 
-    private BossBarHealth plugin = BossBarHealth.inst();
-
     @EventHandler
     public void onRegainHealth(EntityRegainHealthEvent event) {
         LivingEntity entity = (LivingEntity) event.getEntity();
 
-        Bukkit.getScheduler().runTask(plugin, () -> {
+        Bukkit.getScheduler().runTask(BossBarHealth.inst(), () -> {
 
             // If the entity regaining health is player
             if (entity instanceof Player) {
                 Player player = (Player) entity;
 
                 // If SelfBar is not enabled
-                if (!plugin.getConfigManager().isSelfEnabled()) return;
+                if (!BossBarHealth.inst().getConfigManager().isSelfEnabled()) return;
 
                 HealthBar bar = HealthBar.bars.get(player);
 
@@ -46,15 +44,15 @@ public class RegainHealthHandler implements Listener {
                             }
                         }
                     };
-                    runnable.runTaskTimer(plugin, plugin.getConfigManager().getDurationNormal(), 0);
+                    runnable.runTaskTimer(BossBarHealth.inst(), BossBarHealth.inst().getConfigManager().getDurationNormal(), 0);
                 }
             }
 
 
             // If EnemyBar is not enabled
-            if (!plugin.getConfigManager().isEnemyEnabled()) return;
+            if (!BossBarHealth.inst().getConfigManager().isEnemyEnabled()) return;
             // If entity's type is not in blacklist
-            if (plugin.getConfigManager().getBlacklist().contains(entity.getType().toString())) return;
+            if (BossBarHealth.inst().getConfigManager().getBlacklist().contains(entity.getType().toString())) return;
 
             for (Map.Entry<Player, HealthBar> entry : HealthBar.bars.entrySet()) {
                 Player player = entry.getKey();
@@ -63,13 +61,13 @@ public class RegainHealthHandler implements Listener {
                 if (bar.getTarget() != null && bar.getTarget().equals(entity)) {
                     bar.updateEnemy(player, entity, BarType.HPGAIN, event.getAmount(), null, false);
 
-                    int delay = plugin.getConfigManager().getEnemyDurNormal();
+                    int delay = BossBarHealth.inst().getConfigManager().getEnemyDurNormal();
 
                     BukkitRunnable runnable = new BukkitRunnable() {
                         @Override
                         public void run() {
                             if (bar.attemptRemove(delay)) {
-                                if (plugin.getConfigManager().isSelfEnabled()) {
+                                if (BossBarHealth.inst().getConfigManager().isSelfEnabled()) {
                                     if (!HealthBar.hide.contains(player.getUniqueId())) {
                                         bar.getSelfBar().addPlayer(player);
                                     }
@@ -78,7 +76,7 @@ public class RegainHealthHandler implements Listener {
                             }
                         }
                     };
-                    runnable.runTaskTimer(plugin, delay, 0);
+                    runnable.runTaskTimer(BossBarHealth.inst(), delay, 0);
                 }
             }
         });

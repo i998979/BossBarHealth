@@ -18,8 +18,6 @@ import java.util.Map;
 
 public class DamageHandler implements Listener {
 
-    private BossBarHealth plugin = BossBarHealth.inst();
-
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
         Entity victim = event.getEntity();
@@ -48,15 +46,15 @@ public class DamageHandler implements Listener {
                         }
                     }
                 };
-                runnable.runTaskTimer(plugin, plugin.getConfigManager().getDurationNormal(), 0);
+                runnable.runTaskTimer(BossBarHealth.inst(), BossBarHealth.inst().getConfigManager().getDurationNormal(), 0);
             }
         }
 
 
         // If EnemyBar is not enabled
-        if (!plugin.getConfigManager().isEnemyEnabled()) return;
-        if (plugin.getConfigManager().getBlacklist().contains(victim.getType().toString())) return;
-        if (plugin.getConfigManager().getWorldsHidden().contains(victim.getWorld())) return;
+        if (!BossBarHealth.inst().getConfigManager().isEnemyEnabled()) return;
+        if (BossBarHealth.inst().getConfigManager().getBlacklist().contains(victim.getType().toString())) return;
+        if (BossBarHealth.inst().getConfigManager().getWorldsHidden().contains(victim.getWorld())) return;
 
 
         // If Entity Damage By Entity
@@ -93,11 +91,11 @@ public class DamageHandler implements Listener {
         }
 
 
-        Bukkit.getScheduler().runTask(plugin, () -> {
+        Bukkit.getScheduler().runTask(BossBarHealth.inst(), () -> {
 
             final int delay = (((LivingEntity) victim).getHealth() <= 0)
-                    ? plugin.getConfigManager().getEnemyDurZero()
-                    : plugin.getConfigManager().getEnemyDurNormal();
+                    ? BossBarHealth.inst().getConfigManager().getEnemyDurZero()
+                    : BossBarHealth.inst().getConfigManager().getEnemyDurNormal();
 
             // Update everyone's EnemyBar if their target is the victim
             for (Map.Entry<Player, HealthBar> entry : HealthBar.bars.entrySet()) {
@@ -112,7 +110,7 @@ public class DamageHandler implements Listener {
                         @Override
                         public void run() {
                             if (bar.attemptRemove(delay)) {
-                                if (plugin.getConfigManager().isSelfEnabled()) {
+                                if (BossBarHealth.inst().getConfigManager().isSelfEnabled()) {
                                     if (!HealthBar.hide.contains(player.getUniqueId())) {
                                         bar.getSelfBar().addPlayer(player);
                                     }
@@ -121,7 +119,7 @@ public class DamageHandler implements Listener {
                             }
                         }
                     };
-                    runnable.runTaskTimer(plugin, delay, 0);
+                    runnable.runTaskTimer(BossBarHealth.inst(), delay, 0);
                 }
             }
         });

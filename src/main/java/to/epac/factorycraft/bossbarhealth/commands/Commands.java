@@ -12,8 +12,6 @@ import java.util.UUID;
 
 public class Commands implements CommandExecutor {
 
-    private BossBarHealth plugin = BossBarHealth.inst();
-
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (args.length == 0) {
@@ -27,11 +25,11 @@ public class Commands implements CommandExecutor {
                 return false;
             }
 
-            plugin.getConfigManager().load();
+            BossBarHealth.inst().getConfigManager().load();
 
             HealthBar.removeAll();
 
-            if (plugin.getConfigManager().isSelfEnabled() || plugin.getConfigManager().isEnemyEnabled())
+            if (BossBarHealth.inst().getConfigManager().isSelfEnabled() || BossBarHealth.inst().getConfigManager().isEnemyEnabled())
                 HealthBar.updateAll();
 
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7BossBarHealth &8➽ &fConfiguration reloaded."));
@@ -61,7 +59,7 @@ public class Commands implements CommandExecutor {
 
             HealthBar bar = HealthBar.bars.get(player);
             if (bar != null) {
-                if (plugin.getConfigManager().isSelfEnabled())
+                if (BossBarHealth.inst().getConfigManager().isSelfEnabled())
                     if (!bar.getSelfBar().getPlayers().contains(player))
                         bar.getSelfBar().addPlayer(player);
             } else {

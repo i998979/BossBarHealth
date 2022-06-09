@@ -64,11 +64,13 @@ public class HealthBar {
 
 
     public static void updateAll() {
-        Bukkit.getOnlinePlayers().forEach(player -> {
+        for (Player player : Bukkit.getOnlinePlayers()) {
 
             if (!hide.contains(player.getUniqueId())) {
 
                 HealthBar bar = bars.get(player);
+
+                if (BossBarHealth.inst().getConfigManager().getWorldsHidden().contains(player.getWorld())) continue;
 
                 if (bar == null) {
                     bar = new HealthBar();
@@ -76,11 +78,11 @@ public class HealthBar {
                 } else
                     bar.update(player, null, 0.0, null, false);
             }
-        });
+        }
     }
 
     public static void removeAll() {
-        Bukkit.getOnlinePlayers().forEach(player -> {
+        for (Player player : Bukkit.getOnlinePlayers()) {
 
             if (!hide.contains(player.getUniqueId())) {
 
@@ -93,7 +95,7 @@ public class HealthBar {
                     bars.remove(player);
                 }
             }
-        });
+        }
     }
 
 

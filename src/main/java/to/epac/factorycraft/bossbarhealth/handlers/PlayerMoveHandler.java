@@ -9,8 +9,6 @@ import to.epac.factorycraft.bossbarhealth.hpbar.HealthBar.BarType;
 
 public class PlayerMoveHandler {
 
-    private static BossBarHealth plugin = BossBarHealth.inst();
-
     public static void start() {
 
         BukkitRunnable self = new BukkitRunnable() {
@@ -21,12 +19,14 @@ public class PlayerMoveHandler {
                     HealthBar bar = HealthBar.bars.get(player);
 
                     if (bar != null) {
-                        if (!plugin.getConfigManager().getWorldsHidden().contains(player.getWorld()))
+                        if (!BossBarHealth.inst().getConfigManager().getWorldsHidden().contains(player.getWorld()))
                             bar.update(player, bar.getType(), bar.getLostgain(), bar.getCause(), false);
-                        else
+                        else {
                             bar.remove();
+                            HealthBar.bars.remove(player);
+                        }
                     } else {
-                        if (!plugin.getConfigManager().getWorldsHidden().contains(player.getWorld())) {
+                        if (!BossBarHealth.inst().getConfigManager().getWorldsHidden().contains(player.getWorld())) {
                             bar = new HealthBar();
                             bar.update(player, BarType.NORMAL, 0.0, null, true);
                         }
@@ -34,7 +34,7 @@ public class PlayerMoveHandler {
                 }
             }
         };
-        self.runTaskTimer(plugin, 0, plugin.getConfigManager().getFacingRefresh());
+        self.runTaskTimer(BossBarHealth.inst(), 0, BossBarHealth.inst().getConfigManager().getFacingRefresh());
 
 
         BukkitRunnable enemy = new BukkitRunnable() {
@@ -46,15 +46,17 @@ public class PlayerMoveHandler {
 
                     if (bar != null) {
                         if (bar.getTarget() != null) {
-                            if (plugin.getConfigManager().getWorldsHidden().contains(player.getWorld()))
-                                bar.remove();
-                            else
+                            if (!BossBarHealth.inst().getConfigManager().getWorldsHidden().contains(player.getWorld()))
                                 bar.updateEnemy(player, bar.getTarget(), bar.getEnemyType(), bar.getEnemyLostgain(), bar.getEnemyCause(), false);
+                            else {
+                                bar.remove();
+                                HealthBar.bars.remove(player);
+                            }
                         }
                     }
                 }
             }
         };
-        enemy.runTaskTimer(plugin, 0, plugin.getConfigManager().getEnemyFacingRefresh());
+        enemy.runTaskTimer(BossBarHealth.inst(), 0, BossBarHealth.inst().getConfigManager().getEnemyFacingRefresh());
     }
 }

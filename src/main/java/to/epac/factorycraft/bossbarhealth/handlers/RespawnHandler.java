@@ -10,16 +10,16 @@ import to.epac.factorycraft.bossbarhealth.hpbar.HealthBar;
 
 public class RespawnHandler implements Listener {
 
-    private BossBarHealth plugin = BossBarHealth.inst();
-
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
-        if (!plugin.getConfigManager().isSelfEnabled()) return;
+        if (!BossBarHealth.inst().getConfigManager().isSelfEnabled()) return;
 
         Player player = event.getPlayer();
-        Bukkit.getScheduler().runTask(plugin, () -> {
+        Bukkit.getScheduler().runTask(BossBarHealth.inst(), () -> {
 
             HealthBar bar = HealthBar.bars.get(player);
+
+            if (BossBarHealth.inst().getConfigManager().getWorldsHidden().contains(player.getWorld())) return;
 
             if (bar == null) {
                 bar = new HealthBar();

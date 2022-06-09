@@ -10,23 +10,22 @@ import to.epac.factorycraft.bossbarhealth.hpbar.HealthBar;
 
 public class JoinHandler implements Listener {
 
-    private BossBarHealth plugin = BossBarHealth.inst();
-
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
+        Bukkit.getScheduler().runTask(BossBarHealth.inst(), () -> {
 
-        Bukkit.getScheduler().runTask(plugin, () -> {
+            if (!BossBarHealth.inst().getConfigManager().isSelfEnabled()) return;
+
             Player player = event.getPlayer();
             HealthBar bar = HealthBar.bars.get(player);
 
-            if (plugin.getConfigManager().getWorldsHidden().contains(player.getWorld())) return;
+            if (BossBarHealth.inst().getConfigManager().getWorldsHidden().contains(player.getWorld())) return;
 
             if (bar == null) {
                 bar = new HealthBar();
                 bar.update(player, null, 0.0, null, true);
             } else
                 bar.update(player, null, 0.0, null, false);
-
         });
     }
 }
