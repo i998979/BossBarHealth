@@ -104,7 +104,7 @@ public class DamageHandler implements Listener {
 
                 if (bar.getTarget() != null && bar.getTarget().equals(victim)) {
 
-                    bar.updateEnemy(player, (LivingEntity) victim, BarType.HPLOST, event.getDamage() * -1, event.getCause(), false);
+                    bar.updateEnemy(player, (LivingEntity) victim, BarType.HPLOST, event.getFinalDamage() * -1, event.getCause(), false);
 
                     BukkitRunnable runnable = new BukkitRunnable() {
                         @Override
