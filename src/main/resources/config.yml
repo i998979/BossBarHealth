@@ -29,7 +29,7 @@ BossBarHealth:
       # %max_percent%:              Player's maximum health in %
       # %hp_int%                    Player's health in integer
       # %max_int%:                  Player's maximum health in integer
-      # Player's direction:
+      # Player's direction (can be translated below):
       # %direction_cardinalfull%    North, East, South, West
       # %direction_cardinal%        N, E, S, W
       # %direction_ordinalfull%     NorthEast, SouthEast, etc...
@@ -40,6 +40,7 @@ BossBarHealth:
       # Placeholders:
       # %change%          Player's health gained/lost
       # %change_percent%:           Player's health lost/gained in %
+      Dead: '%direction_cardinal% %displayname% Dead &7(&c-%change%&7)'
       HpLost: '%direction_cardinal% %displayname% %hp%/%max% &7(&c-%change%&7)'
       HpGain: '%direction_cardinal% %displayname% %hp%/%max% &7(&a+%change%&7)'
       # Duration of lost/gained hp staying on screen, in ticks
@@ -73,13 +74,15 @@ BossBarHealth:
       # %e_hp_int%                    Enemy's health in integer
       # %e_max_int%                   Enemy's maximum health in integer
       # %e_change%:                   Enemy's health lost/gained
-      # Enemy's direction:
+      # Enemy's direction (can be translated below):
       # %e_direction_cardinalfull%    North, East, South, West
       # %e_direction_cardinal         N, E, S, W
       # %e_direction_ordinalfull%     NorthEast, SouthEast, etc...
       # %e_direction_ordinal%         NE, SE, etc...
       # %e_direction_number%          0-359 degrees
-
+      Dead: '%e_name% Dead &7(&c-%e_change%&7)'
+      # When the player dies
+      SelfDead: '%e_name% %e_hp%/%e_max% &7(&c-%e_change%&7)'
       HpLost: '%e_name% %e_hp%/%e_max% &7(&c-%e_change%&7)'
       HpGain: '%e_name% %e_hp%/%e_max% &7(&a+%e_change%&7)'
       # Duration of enemy's boss bar staying on screen, in ticks
@@ -109,6 +112,31 @@ BossBarHealth:
     FALL:
       Color: WHITE
       Style: SOLID
+
+  # Translation of directions
+  Direction:
+    Ordinal:
+      Full:
+        East: East
+        South: South
+        West: West
+        North: North
+      Short:
+        East: E
+        South: S
+        West: W
+        North: N
+    Cardinal:
+      Full:
+        NorthEast: NorthEast
+        SouthEast: SouthEast
+        SouthWest: SouthWest
+        NorthWest: NorthWest
+      Short:
+        NorthEast: NE
+        SouthEast: SE
+        SouthWest: SW
+        NorthWest: NW
 
   # Settings of other plugins that was supported by BossBarHealth
   Hooks:

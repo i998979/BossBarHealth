@@ -34,6 +34,7 @@ public class ConfigManager {
     public static String fnormal;
     public static String fhplost;
     public static String fhpgain;
+    public static String fdead;
     public static int durnormal;
     public static int durzero;
     public static int refresh;
@@ -46,9 +47,32 @@ public class ConfigManager {
     public static boolean override;
     public static String e_fhplost;
     public static String e_fhpgain;
+    public static String e_fsdead;
+    public static String e_fdead;
     public static int e_durnormal;
     public static int e_durzero;
     public static int e_refresh;
+
+    // Directions
+    public static String full_e;
+    public static String full_s;
+    public static String full_w;
+    public static String full_n;
+
+    public static String short_e;
+    public static String short_s;
+    public static String short_w;
+    public static String short_n;
+
+    public static String full_ne;
+    public static String full_se;
+    public static String full_sw;
+    public static String full_nw;
+
+    public static String short_ne;
+    public static String short_se;
+    public static String short_sw;
+    public static String short_nw;
 
 
     public static List<String> blacklist;
@@ -89,6 +113,7 @@ public class ConfigManager {
         fnormal = conf.getString("BossBarHealth.Self.Format.Normal", "&b%hp_int%/%max_int%");
         fhplost = conf.getString("BossBarHealth.Self.Format.HpLost", "&b%hp_int%/%max_int% &7(&c%change%&7)");
         fhpgain = conf.getString("BossBarHealth.Self.Format.HpGain", "&b%hp_int%/%max_int% &7(&a%change%&7)");
+        fdead = conf.getString("BossBarHealth.Self.Format.Dead", "");
         durnormal = conf.getInt("BossBarHealth.Self.Format.Duration.Normal", 40);
         durzero = conf.getInt("BossBarHealth.Self.Format.Duration.Zero", 10);
         refresh = conf.getInt("BossBarHealth.Self.Facing.Refresh", 20);
@@ -100,6 +125,8 @@ public class ConfigManager {
         override = conf.getBoolean("BossBarHealth.Enemy.Override", false);
         e_fhplost = conf.getString("BossBarHealth.Enemy.Format.HpLost", "%e_displayname%: %e_hp_int%/%e_max_int% &7(&c%e_change%&7)");
         e_fhpgain = conf.getString("BossBarHealth.Enemy.Format.HpGain", "%e_displayname%: %e_hp_int%/%e_max_int% &7(&a%e_change%&7)");
+        e_fsdead = conf.getString("BossBarHealth.Enemy.Format.SelfDead", "");
+        e_fdead = conf.getString("BossBarHealth.Enemy.Format.Dead", "");
         e_durnormal = conf.getInt("BossBarHealth.Enemy.Format.Duration.Normal", 40);
         e_durzero = conf.getInt("BossBarHealth.Enemy.Format.Duration.Zero", 10);
         e_refresh = conf.getInt("BossBarHealth.Enemy.Facing.Refresh", 20);
@@ -127,6 +154,26 @@ public class ConfigManager {
             wgsetting.put(region, new BarSetting(BarColor.valueOf(dcolor), BarStyle.valueOf(dstyle)));
         }
 
+
+        full_e = conf.getString("BossBarHealth.Direction.Ordinal.Full.East", "East");
+        full_s = conf.getString("BossBarHealth.Direction.Ordinal.Full.South", "South");
+        full_w = conf.getString("BossBarHealth.Direction.Ordinal.Full.West", "West");
+        full_n = conf.getString("BossBarHealth.Direction.Ordinal.Full.North", "North");
+
+        short_e = conf.getString("BossBarHealth.Direction.Ordinal.Short.East", "E");
+        short_s = conf.getString("BossBarHealth.Direction.Ordinal.Short.South", "S");
+        short_w = conf.getString("BossBarHealth.Direction.Ordinal.Short.West", "W");
+        short_n = conf.getString("BossBarHealth.Direction.Ordinal.Short.North", "N");
+
+        full_ne = conf.getString("BossBarHealth.Direction.Cardinal.Full.NorthEast", "NorthEast");
+        full_se = conf.getString("BossBarHealth.Direction.Cardinal.Full.SouthEast", "SouthEast");
+        full_sw = conf.getString("BossBarHealth.Direction.Cardinal.Full.SouthWest", "SouthWest");
+        full_nw = conf.getString("BossBarHealth.Direction.Cardinal.Full.NorthWest", "NorthWest");
+
+        short_ne = conf.getString("BossBarHealth.Direction.Cardinal.Short.NorthEast", "NE");
+        short_se = conf.getString("BossBarHealth.Direction.Cardinal.Short.SouthEast", "SE");
+        short_sw = conf.getString("BossBarHealth.Direction.Cardinal.Short.SouthWest", "SW");
+        short_nw = conf.getString("BossBarHealth.Direction.Cardinal.Short.NorthWest", "NW");
     }
 
     public void save() {
@@ -158,6 +205,7 @@ public class ConfigManager {
         conf.set("BossBarHealth.Self.Format.Normal", fnormal);
         conf.set("BossBarHealth.Self.Format.HpLost", fhplost);
         conf.set("BossBarHealth.Self.Format.HpGain", fhpgain);
+        conf.set("BossBarHealth.Self.Format.Dead", fdead);
         conf.set("BossBarHealth.Self.Format.Duration.Normal", durnormal);
         conf.set("BossBarHealth.Self.Format.Duration.Zero", durzero);
         conf.set("BossBarHealth.Self.Format.Facing.Refresh", refresh);
@@ -169,6 +217,8 @@ public class ConfigManager {
         conf.set("BossBarHealth.Enemy.Override", override);
         conf.set("BossBarHealth.Enemy.Format.HpLost", e_fhplost);
         conf.set("BossBarHealth.Enemy.Format.HpGain", e_fhpgain);
+        conf.set("BossBarHealth.Enemy.Format.SelfDead", e_fsdead);
+        conf.set("BossBarHealth.Enemy.Format.Dead", e_fdead);
         conf.set("BossBarHealth.Enemy.Format.Duration.Normal", e_durnormal);
         conf.set("BossBarHealth.Enemy.Format.Duration.Zero", e_durzero);
         conf.set("BossBarHealth.Enemy.Facing.Refresh", e_refresh);
@@ -238,6 +288,10 @@ public class ConfigManager {
         return fhpgain;
     }
 
+    public String getFormatDead() {
+        return fdead;
+    }
+
     public int getDurationNormal() {
         return durnormal;
     }
@@ -285,6 +339,14 @@ public class ConfigManager {
 
     public String getEnemyFormatHpGain() {
         return e_fhpgain;
+    }
+
+    public String getEnemyFormatDead() {
+        return e_fdead;
+    }
+
+    public String getEnemyFormatSelfDead() {
+        return e_fsdead;
     }
 
     public int getEnemyDurNormal() {

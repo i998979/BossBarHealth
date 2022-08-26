@@ -4,6 +4,8 @@ import to.epac.factorycraft.bossbarhealth.BossBarHealth;
 
 import java.text.DecimalFormat;
 
+import static to.epac.factorycraft.bossbarhealth.config.ConfigManager.*;
+
 public class Utils {
 
     private static BossBarHealth plugin = BossBarHealth.inst();
@@ -38,24 +40,24 @@ public class Utils {
         // ORDINAL (E, S, W, N)
         if (type.startsWith("ORDINAL")) {
             if (yaw >= 0 && yaw < 45) {
-                if (type.equals("ORDINAL_FULL")) direction = "South";
-                else if (type.equals("ORDINAL")) direction = "S";
+                if (type.equals("ORDINAL_FULL")) direction = full_s;
+                else if (type.equals("ORDINAL")) direction = short_s;
             }
             if (45 <= yaw && yaw < 135) {
-                if (type.equals("ORDINAL_FULL")) direction = "West";
-                else if (type.equals("ORDINAL")) direction = "W";
+                if (type.equals("ORDINAL_FULL")) direction = full_w;
+                else if (type.equals("ORDINAL")) direction = short_w;
             }
             if (135 <= yaw && yaw < 225) {
-                if (type.equals("ORDINAL_FULL")) direction = "North";
-                else if (type.equals("ORDINAL")) direction = "N";
+                if (type.equals("ORDINAL_FULL")) direction = full_n;
+                else if (type.equals("ORDINAL")) direction = short_n;
             }
             if (225 <= yaw && yaw < 315) {
-                if (type.equals("ORDINAL_FULL")) direction = "East";
-                else if (type.equals("ORDINAL")) direction = "E";
+                if (type.equals("ORDINAL_FULL")) direction = full_e;
+                else if (type.equals("ORDINAL")) direction = short_e;
             }
             if (315 <= yaw && yaw <= 360) {
-                if (type.equals("ORDINAL_FULL")) direction = "South";
-                else if (type.equals("ORDINAL")) direction = "S";
+                if (type.equals("ORDINAL_FULL")) direction = full_s;
+                else if (type.equals("ORDINAL")) direction = short_s;
             }
         }
 
@@ -63,40 +65,40 @@ public class Utils {
         // CARDINAL and NE, SE, etc...
         else if (type.startsWith("CARDINAL")) {
             if (0 <= yaw && yaw < 22.5) {
-                if (type.equals("CARDINAL_FULL")) direction = "South";
-                else if (type.equals("CARDINAL")) direction = "S";
+                if (type.equals("CARDINAL_FULL")) direction = full_s;
+                else if (type.equals("CARDINAL")) direction = short_s;
             }
             if (22.5 <= yaw && yaw < 67.5) {
-                if (type.equals("CARDINAL_FULL")) direction = "SouthWest";
-                else if (type.equals("CARDINAL")) direction = "SW";
+                if (type.equals("CARDINAL_FULL")) direction = full_sw;
+                else if (type.equals("CARDINAL")) direction = short_sw;
             }
             if (67.5 <= yaw && yaw < 112.5) {
-                if (type.equals("CARDINAL_FULL")) direction = "West";
-                else if (type.equals("CARDINAL")) direction = "W";
+                if (type.equals("CARDINAL_FULL")) direction = full_w;
+                else if (type.equals("CARDINAL")) direction = short_w;
             }
             if (112.5 <= yaw && yaw < 157.5) {
-                if (type.equals("CARDINAL_FULL")) direction = "NorthWest";
-                else if (type.equals("CARDINAL")) direction = "NW";
+                if (type.equals("CARDINAL_FULL")) direction = full_nw;
+                else if (type.equals("CARDINAL")) direction = short_nw;
             }
             if (157.5 <= yaw && yaw < 202.5) {
-                if (type.equals("CARDINAL_FULL")) direction = "North";
-                else if (type.equals("CARDINAL")) direction = "N";
+                if (type.equals("CARDINAL_FULL")) direction = full_n;
+                else if (type.equals("CARDINAL")) direction = short_n;
             }
             if (202.5 <= yaw && yaw < 247.5) {
-                if (type.equals("CARDINAL_FULL")) direction = "NorthEast";
-                else if (type.equals("CARDINAL")) direction = "NE";
+                if (type.equals("CARDINAL_FULL")) direction = full_ne;
+                else if (type.equals("CARDINAL")) direction = short_ne;
             }
             if (247.5 <= yaw && yaw < 292.5) {
-                if (type.equals("CARDINAL_FULL")) direction = "East";
-                else if (type.equals("CARDINAL")) direction = "E";
+                if (type.equals("CARDINAL_FULL")) direction = full_e;
+                else if (type.equals("CARDINAL")) direction = short_e;
             }
             if (292.5 <= yaw && yaw < 337.5) {
-                if (type.equals("CARDINAL_FULL")) direction = "SouthEast";
-                else if (type.equals("CARDINAL")) direction = "SE";
+                if (type.equals("CARDINAL_FULL")) direction = full_se;
+                else if (type.equals("CARDINAL")) direction = short_se;
             }
             if (337.5 <= yaw && yaw <= 360) {
-                if (type.equals("CARDINAL_FULL")) direction = "South";
-                else if (type.equals("CARDINAL")) direction = "S";
+                if (type.equals("CARDINAL_FULL")) direction = full_s;
+                else if (type.equals("CARDINAL")) direction = short_s;
             }
         }
 

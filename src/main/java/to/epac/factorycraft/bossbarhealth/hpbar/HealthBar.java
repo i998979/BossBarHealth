@@ -141,7 +141,9 @@ public class HealthBar {
 
         String title = "";
 
-        if ((type == null && lostgain < 0.0) || type == BarType.HPLOST)
+        if (hp <= 0 && !plugin.getConfigManager().getFormatDead().isEmpty())
+            title = plugin.getConfigManager().getFormatDead();
+        else if ((type == null && lostgain < 0.0) || type == BarType.HPLOST)
             title = plugin.getConfigManager().getFormatHpLost();
         else if ((type == null && lostgain > 0.0) || type == BarType.HPGAIN)
             title = plugin.getConfigManager().getFormatHpGain();
@@ -295,7 +297,11 @@ public class HealthBar {
 
 
         String title = "";
-        if ((type == null && lostgain < 0.0) || type == BarType.HPLOST)
+        if (hp <= 0 && !plugin.getConfigManager().getEnemyFormatSelfDead().isEmpty())
+            title = plugin.getConfigManager().getEnemyFormatSelfDead();
+        else if (e_hp <= 0 && !plugin.getConfigManager().getEnemyFormatDead().isEmpty())
+            title = plugin.getConfigManager().getEnemyFormatDead();
+        else if ((type == null && lostgain < 0.0) || type == BarType.HPLOST)
             title = plugin.getConfigManager().getEnemyFormatHpLost();
         else if ((type == null && lostgain >= 0.0) || type == BarType.HPGAIN)
             title = plugin.getConfigManager().getEnemyFormatHpGain();
