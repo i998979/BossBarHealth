@@ -26,6 +26,7 @@ public class Commands implements CommandExecutor {
             }
 
             BossBarHealth.inst().getConfigManager().load();
+            BossBarHealth.inst().getLangManager().load();
 
             HealthBar.removeAll();
 

@@ -18,8 +18,6 @@ public class LangManager {
 
     public LangManager(BossBarHealth plugin) {
         this.plugin = plugin;
-
-        translates = new HashMap<>();
     }
 
     public void load() {
@@ -30,6 +28,7 @@ public class LangManager {
 
         FileConfiguration conf = YamlConfiguration.loadConfiguration(confFile);
 
+        translates = new HashMap<>();
         for (String type : conf.getConfigurationSection("").getKeys(false)) {
             translates.put(EntityType.valueOf(type), conf.getString(type));
         }

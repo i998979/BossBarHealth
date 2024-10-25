@@ -74,6 +74,10 @@ public class BossBarHealth extends JavaPlugin {
         return configManager;
     }
 
+    public LangManager getLangManager() {
+        return langManager;
+    }
+
     public boolean usePapi() {
         return Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null;
     }
