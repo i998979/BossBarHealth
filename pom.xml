@@ -35,7 +35,7 @@
                     <relocations>
                         <relocation>
                             <pattern>org.bstats</pattern>
-                            <shadedPattern>to.epac.factorycraft.bossbarhealth</shadedPattern>
+                            <shadedPattern>to.epac.factorycraft.bossbarhealth.metrics</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
