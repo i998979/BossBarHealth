@@ -6,7 +6,7 @@
 
     <groupId>to.epac.factorycraft</groupId>
     <artifactId>BossBarHealth</artifactId>
-    <version>4.1.14-SNAPSHOT</version>
+    <version>4.1.15-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>BossBarHealth</name>
@@ -96,6 +96,21 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-api</artifactId>
+            <version>4.22.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-text-minimessage</artifactId>
+            <version>4.22.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-text-serializer-legacy</artifactId>
+            <version>4.22.0</version>
+        </dependency>
+        <dependency>
             <groupId>com.sk89q.worldguard</groupId>
             <artifactId>worldguard-bukkit</artifactId>
             <version>7.1.0-SNAPSHOT</version>
@@ -129,7 +144,7 @@
         <dependency>
             <groupId>io.lumine</groupId>
             <artifactId>Mythic-Dist</artifactId>
-            <version>5.7.1</version>
+            <version>5.9.5</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

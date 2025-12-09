@@ -5,7 +5,6 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import net.citizensnpcs.api.CitizensAPI;
 import net.raidstone.wgevents.WorldGuardEvents;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.boss.BarColor;
@@ -16,6 +15,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import to.epac.factorycraft.bossbarhealth.BossBarHealth;
+import to.epac.factorycraft.bossbarhealth.utils.ChatColor;
 import to.epac.factorycraft.bossbarhealth.utils.Utils;
 
 import javax.annotation.Nullable;
