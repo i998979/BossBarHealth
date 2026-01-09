@@ -374,7 +374,8 @@ public class HealthBar {
                 && MythicBukkit.inst().getAPIHelper().isMythicMob(target))
             title = title
                     .replaceAll("%e_name%", MythicBukkit.inst().getAPIHelper().getMythicMobInstance(target).getType().getInternalName())
-                    .replaceAll("%e_displayname%", MythicBukkit.inst().getAPIHelper().getMythicMobInstance(target).getDisplayName());
+                    .replaceAll("%e_displayname%", MythicBukkit.inst().getAPIHelper().getMythicMobInstance(target).getDisplayName() == null ? ""
+                            : MythicBukkit.inst().getAPIHelper().getMythicMobInstance(target).getDisplayName());
         else
             title = title
                     .replaceAll("%e_name%", plugin.langManager.getText(target))
